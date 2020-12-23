@@ -20,7 +20,7 @@ public class Problem1
         System.out.println( "\nДлина массива: " + numbers.length + "\nСумма чисел: " + sum );
     }
 
-    public static int[] getNaturalNumbers( int numberCount )
+    static int[] getNaturalNumbers( int numberCount )
     {
         // Решение
         int[] numbers = new int[ numberCount ];
@@ -48,7 +48,7 @@ public class Problem1
         return numbers;
     }
 
-    public static int getArraySum( int[] array )
+    static int getArraySum( int[] array )
     {
         int sum = 0;
         for ( int number : array )
