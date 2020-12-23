@@ -39,7 +39,7 @@ class Problem4
 
         return new int[3];
     }
-    
+
     static boolean isPalindrome( int number )
     {
         // Преобразуем число в цифры и сохраняем в массив
