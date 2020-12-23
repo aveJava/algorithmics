@@ -15,7 +15,7 @@ class Problem7
         int position = 10_001;
         int result = getSimpleNumberAtPosition( position );
 
-        System.out.format( "10001-ым простым числов является число: %d", result );
+        System.out.format( "10001-ым простым числом является число: %d", result );
     }
 
     /**
