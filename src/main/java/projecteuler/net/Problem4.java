@@ -39,8 +39,7 @@ class Problem4
 
         return new int[3];
     }
-
-
+    
     static boolean isPalindrome( int number )
     {
         // Преобразуем число в цифры и сохраняем в массив
@@ -56,25 +55,6 @@ class Problem4
         }
 
         return true;
-    }
-
-    static int getNumberLength( int number )
-    {
-        if ( number == 0 ) {
-            return 1;
-        }
-
-        int length = 0;
-
-        // Делим число пока оно не равно 0
-        while( number != 0 )
-        {
-            // Отбрасываем последний разряд
-            number /= 10;
-            length++;
-        }
-
-        return length;
     }
 
     static int[] splitNumberOnParts( int number )
@@ -110,5 +90,24 @@ class Problem4
         }
 
         return result;
+    }
+
+    static int getNumberLength( int number )
+    {
+        if ( number == 0 ) {
+            return 1;
+        }
+
+        int length = 0;
+
+        // Делим число пока оно не равно 0
+        while( number != 0 )
+        {
+            // Отбрасываем последний разряд
+            number /= 10;
+            length++;
+        }
+
+        return length;
     }
 }
