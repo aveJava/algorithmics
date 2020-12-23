@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class Problem3Test
+class Problem3Test
 {
     //TODO Простые числа 5, 7, 13, 29
     @Test
