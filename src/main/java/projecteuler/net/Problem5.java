@@ -18,23 +18,23 @@ class Problem5
     static int getSolution( int from, int to )
     {
         // Начинаем поиск наименьшего кратного с максимального множителя to
-        int number = to;
+        int resultNumber = to;
         while( true )
         {
             // Перемножаем число на все множители от to до from
-            for( int multiplier = to; multiplier >= from; multiplier-- )
+            for( int i = to; i >= from; i-- )
             {
                 // Данное число не поделилось без остатка, переходим к следующему
-                if( number % multiplier != 0 )
+                if( resultNumber % i != 0 )
                 {
-                    number++;
+                    resultNumber += to;
                     break;
                 }
 
                 // Все итерации пройдены для данного числа, значит оно искомое наименьшее кратное
-                if( multiplier == from )
+                if( i == from )
                 {
-                    return number;
+                    return resultNumber;
                 }
             }
         }
