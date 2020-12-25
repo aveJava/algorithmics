@@ -10,7 +10,7 @@ class Problem5
     {
         int from = 1;
         int to = 20;
-        int result = getSolution( 1, 20 );
+        int result = getSolution( from, to );
 
         System.out.format( "%d - самое маленькое число которое делится без остатка на все числа от %d до %d", result, from, to );
     }
