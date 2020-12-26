@@ -8,6 +8,7 @@ package projecteuler.net;
 
 class Problem11
 {
+    private static final int sequenceLength = 4;
     private static final int[][] TABLE = {
             {  8,  2, 22, 97, 38, 15,  0, 40,  0, 75,  4,  5,  7, 78, 52, 12, 50, 77, 91,  8 },
             { 49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48,  4, 56, 62,  0 },
@@ -33,48 +34,45 @@ class Problem11
 
     public static void main( String[] args )
     {
-        int sequenceLength = 4;
-        long result = findGreatestProduct( TABLE, sequenceLength );
+        long result = findGreatestProduct();
 
         System.out.println( "Наибольшее произведение четырех подряд идущих чисел расположенных в любом направлении: " + result );
     }
 
-    static long findGreatestProduct( int[][] table, int sequenceLength )
+    static long findGreatestProduct()
     {
         // Наибольшее произведение чисел
         long maxResult = 1;
 
         // Направление - вправо
-        maxResult = Math.max( maxResult, findGreatestProductInHorizontal( table, sequenceLength ));
+        maxResult = Math.max( maxResult, findGreatestProductInHorizontal());
 
         // Направление - вниз
-        maxResult = Math.max( maxResult, findGreatestProductInVertical( table, sequenceLength ));
+        maxResult = Math.max( maxResult, findGreatestProductInVertical());
 
         // Направление - диагональ вправо
-        maxResult = Math.max( maxResult, findGreatestProductInRightDiagonal( table, sequenceLength ));
+        maxResult = Math.max( maxResult, findGreatestProductInRightDiagonal());
 
         // Направление - диагональ влево
-        maxResult = Math.max( maxResult, findGreatestProductInLeftDiagonal( table, sequenceLength ));
+        maxResult = Math.max( maxResult, findGreatestProductInLeftDiagonal());
 
         return maxResult;
     }
 
     /**
      * Считает произведение элементов по горизонтали в направлении слева направо
-     * @param table - таблица, в которой идет поиск наибольшего произведения
-     * @param sequenceLength - длина последовательности. Кол-во подряд идущих множителей
      * @return - наибольшее произведение
      */
-    static long findGreatestProductInHorizontal( int[][] table, int sequenceLength )
+    static long findGreatestProductInHorizontal()
     {
         // Наибольшее произведение по горизонтали
         long result = 1;
 
         // Перебираем строки
-        for( int row = 0; row < table.length; row++ )
+        for( int row = 0; row < TABLE.length; row++ )
         {
             // Последний индекс в строке, при котором умещается последовательность
-            int lastColumn = table[ row ].length - sequenceLength;
+            int lastColumn = TABLE[ row ].length - sequenceLength;
 
             // Перебираем столбцы в строке
             for( int column = 0; column <= lastColumn; column++ )
@@ -88,7 +86,7 @@ class Problem11
                 // Умножаем последовательно идущие элементы
                 for( int element = column; element <= endElement; element++ )
                 {
-                    currentProduct *= table[ row ][ element ];
+                    currentProduct *= TABLE[ row ][ element ];
                 }
 
                 // Наибольшее произведение на данный момент
@@ -101,23 +99,21 @@ class Problem11
 
     /**
      * Считает произведение элементов по вертикали в направлении сверху вниз
-     * @param table - таблица, в которой идет поиск наибольшего произведения
-     * @param sequenceLength - длина последовательности. Кол-во подряд идущих множителей
      * @return - наибольшее произведение
      */
-    static long findGreatestProductInVertical( int[][] table, int sequenceLength )
+    static long findGreatestProductInVertical()
     {
         // Наибольшее произведение по вертикали
         long result = 1;
 
         // Последняя строка, в которой умещается последовательность
-        int lastRow = table.length - sequenceLength;
+        int lastRow = TABLE.length - sequenceLength;
 
         // Перебираем строки
         for( int row = 0; row <= lastRow; row++ )
         {
             // Перебираем столбцы в строке
-            for( int column = 0; column < table[ row ].length; column++ )
+            for( int column = 0; column < TABLE[ row ].length; column++ )
             {
                 // Текущее произведение элементов
                 long currentProduct = 1;
@@ -128,7 +124,7 @@ class Problem11
                 // Умножаем последовательно идущие элементы
                 for( int element = row; element <= endElement; element++ )
                 {
-                    currentProduct *= table[ element ][ column ];
+                    currentProduct *= TABLE[ element ][ column ];
                 }
 
                 // Наибольшее произведение на данный момент
@@ -141,23 +137,21 @@ class Problem11
 
     /**
      * Считает произведение элементов по диагонали в направлении вправо сверху вниз
-     * @param table - таблица, в которой идет поиск наибольшего произведения
-     * @param sequenceLength - длина последовательности-диагонали. Кол-во подряд идущих множителей
      * @return - наибольшее произведение
      */
-    static long findGreatestProductInRightDiagonal( int[][] table, int sequenceLength )
+    static long findGreatestProductInRightDiagonal()
     {
         // Наибольшее произведение по диагонали сверху вниз вправо
         long result = 1;
 
         // Последняя строка в таблице, при которой вмещается вся диагональ
-        int lastRow = table.length - sequenceLength;
+        int lastRow = TABLE.length - sequenceLength;
 
         // Перебираем строки
         for( int row = 0; row <= lastRow; row++ )
         {
             // Последний индекс в строке, при котором вмещается вся диагональ
-            int lastColumn = table[ row ].length - sequenceLength;
+            int lastColumn = TABLE[ row ].length - sequenceLength;
 
             // Перебираем столбцы в строке
             for( int column = 0; column <= lastColumn; column++ )
@@ -173,7 +167,7 @@ class Problem11
                 for( int columnElement = column; columnElement <= endElement; columnElement++ )
                 {
                     // Перемножаем элементы диагонали в направлении сверху вниз вправо
-                    currentProduct *= table[ ++rowElement ][ columnElement ];
+                    currentProduct *= TABLE[ ++rowElement ][ columnElement ];
                 }
 
                 // Наибольшее произведение на данный момент
@@ -186,17 +180,15 @@ class Problem11
 
     /**
      * Считает произведение элементов по диагонали в направлении влево сверху вниз
-     * @param table - таблица, в которой идет поиск наибольшего произведения
-     * @param sequenceLength - длина последовательности-диагонали. Кол-во подряд идущих множителей
      * @return - наибольшее произведение
      */
-    static long findGreatestProductInLeftDiagonal( int[][] table, int sequenceLength )
+    static long findGreatestProductInLeftDiagonal()
     {
         // Наибольшее произведение по диагонали сверху вниз влево
         long result = 1;
 
         // Последняя строка в таблица, при которой вмещается вся диагональ
-        int lastRow = table.length - sequenceLength;
+        int lastRow = TABLE.length - sequenceLength;
 
         // Перебираем строки
         for( int row = 0; row <= lastRow; row++ )
@@ -205,7 +197,7 @@ class Problem11
             int lastColumn = sequenceLength - 1;
 
             // Перебираем столбцы в строке в обратном порядке
-            for( int column = table[ row ].length - 1; column >= lastColumn; column-- )
+            for( int column = TABLE[ row ].length - 1; column >= lastColumn; column-- )
             {
                 // Текущее произведение элементов
                 long currentProduct = 1;
@@ -218,7 +210,7 @@ class Problem11
                 for( int columnElement = column; columnElement >= endElement; columnElement-- )
                 {
                     // Перемножаем элементы диагонали в направлении сверху вниз влево
-                    currentProduct *= table[ ++rowElement ][ columnElement ];
+                    currentProduct *= TABLE[ ++rowElement ][ columnElement ];
                 }
 
                 // Наибольшее произведение на данный момент
@@ -228,4 +220,12 @@ class Problem11
 
         return result;
     }
+
+//    public static int[][] getTABLE() {
+//        return TABLE;
+//    }
+//
+//    public static void setTABLE(int[][] table) {
+//        TABLE = table;
+//    }
 }

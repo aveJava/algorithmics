@@ -28,19 +28,19 @@ class Problem11Test
         // Таблица 4х4 и длина последовательности = 4
         int sequenceLength = 4;
         long greatestProductExpected = 660;
-        long greatestProductActual = Problem11.findGreatestProductInHorizontal( TABLE, sequenceLength );
+        long greatestProductActual = Problem11.findGreatestProductInHorizontal();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 3
         sequenceLength = 3;
         greatestProductExpected = 150;
-        greatestProductActual = Problem11.findGreatestProductInHorizontal( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProductInHorizontal();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 2
         sequenceLength = 2;
         greatestProductExpected = 55;
-        greatestProductActual = Problem11.findGreatestProductInHorizontal( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProductInHorizontal();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
     }
 
@@ -51,19 +51,19 @@ class Problem11Test
         // Таблица 4х4 и длина последовательности = 4
         int sequenceLength = 4;
         long greatestProductExpected = 616;
-        long greatestProductActual = Problem11.findGreatestProductInVertical( TABLE, sequenceLength );
+        long greatestProductActual = Problem11.findGreatestProductInVertical();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 3
         sequenceLength = 3;
         greatestProductExpected = 308;
-        greatestProductActual = Problem11.findGreatestProductInVertical( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProductInVertical();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 2
         sequenceLength = 2;
         greatestProductExpected = 77;
-        greatestProductActual = Problem11.findGreatestProductInVertical( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProductInVertical();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
     }
 
@@ -74,19 +74,19 @@ class Problem11Test
         // Таблица 4х4 и длина последовательности = 4
         int sequenceLength = 4;
         long greatestProductExpected = 50;
-        long greatestProductActual = Problem11.findGreatestProductInRightDiagonal( TABLE, sequenceLength );
+        long greatestProductActual = Problem11.findGreatestProductInRightDiagonal();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 3
         sequenceLength = 3;
         greatestProductExpected = 50;
-        greatestProductActual = Problem11.findGreatestProductInRightDiagonal( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProductInRightDiagonal();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 2
         sequenceLength = 2;
         greatestProductExpected = 70;
-        greatestProductActual = Problem11.findGreatestProductInRightDiagonal( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProductInRightDiagonal();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
     }
 
@@ -97,19 +97,19 @@ class Problem11Test
         // Таблица 4х4 и длина последовательности = 4
         int sequenceLength = 4;
         long greatestProductExpected = 24;
-        long greatestProductActual = Problem11.findGreatestProductInLeftDiagonal( TABLE, sequenceLength );
+        long greatestProductActual = Problem11.findGreatestProductInLeftDiagonal();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 3
         sequenceLength = 3;
         greatestProductExpected = 300;
-        greatestProductActual = Problem11.findGreatestProductInLeftDiagonal( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProductInLeftDiagonal();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 2
         sequenceLength = 2;
         greatestProductExpected = 110;
-        greatestProductActual = Problem11.findGreatestProductInLeftDiagonal( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProductInLeftDiagonal();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
     }
 
@@ -120,19 +120,19 @@ class Problem11Test
         // Таблица 4х4 и длина последовательности = 4
         int sequenceLength = 4;
         long greatestProductExpected = 660;
-        long greatestProductActual = Problem11.findGreatestProduct( TABLE, sequenceLength );
+        long greatestProductActual = Problem11.findGreatestProduct();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 3
         sequenceLength = 3;
         greatestProductExpected = 308;
-        greatestProductActual = Problem11.findGreatestProduct( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProduct();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
 
         // Таблица 4х4 и длина последовательности = 2
         sequenceLength = 2;
         greatestProductExpected = 110;
-        greatestProductActual = Problem11.findGreatestProduct( TABLE, sequenceLength );
+        greatestProductActual = Problem11.findGreatestProduct();
         Assertions.assertEquals( greatestProductExpected, greatestProductActual );
     }
 }
