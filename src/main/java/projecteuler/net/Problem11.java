@@ -8,8 +8,7 @@ package projecteuler.net;
 
 class Problem11
 {
-    private static final int sequenceLength = 4;
-    private static final int[][] TABLE = {
+    private static final int[][] constantTABLE = {
             {  8,  2, 22, 97, 38, 15,  0, 40,  0, 75,  4,  5,  7, 78, 52, 12, 50, 77, 91,  8 },
             { 49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48,  4, 56, 62,  0 },
             { 81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30,  3, 49, 13, 36, 65 },
@@ -31,9 +30,12 @@ class Problem11
             { 20, 73, 35, 29, 78, 31, 90,  1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57,  5, 54 },
             {  1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52,  1, 89, 19, 67, 48 }
     };
+    private static int sequenceLength = 4;
+    private static int[][] TABLE = constantTABLE;
 
     public static void main( String[] args )
     {
+        Problem11.reset();
         long result = findGreatestProduct();
 
         System.out.println( "Наибольшее произведение четырех подряд идущих чисел расположенных в любом направлении: " + result );
@@ -221,7 +223,20 @@ class Problem11
         return result;
     }
 
-//    public static int[][] getTABLE() {
+    static public void reset() {
+        TABLE = constantTABLE;
+        sequenceLength = 4;
+    }
+
+    public static void setTABLE(int[][] TABLE) {
+        Problem11.TABLE = TABLE;
+    }
+
+    public static void setSequenceLength(int sequenceLength) {
+        Problem11.sequenceLength = sequenceLength;
+    }
+
+    //    public static int[][] getTABLE() {
 //        return TABLE;
 //    }
 //
