@@ -19,6 +19,26 @@ class Problem11Test
 //           616  500 100 18  - Вертикальное произведение всех элементов
     };
 
+    /**
+     * Выполняет поиск наибольшего произведения указанным способом
+     * @param seqLength - сколько чисел участвуют в произведении
+     * @param expected - ожидаемый результат поиска
+     * @param type - тип поиска (по горизонтали, по вертикали и т.д.)
+     * @return - true, если результат поиска совпал с ожидаемым
+     */
+    boolean invokeTest(int seqLength, long expected, String type) {
+        Problem11.setSequenceLength(seqLength);
+        long actual = -1;
+        switch (type){
+            case "Horizontal" -> actual = Problem11.findGreatestProductInHorizontal();
+            case "Vertical" -> actual = Problem11.findGreatestProductInVertical();
+            case "DiagonalRight" -> actual = Problem11.findGreatestProductInRightDiagonal();
+            case "DiagonalLeft" -> actual = Problem11.findGreatestProductInLeftDiagonal();
+            case "Greatest" -> actual = Problem11.findGreatestProduct();
+        }
+        return actual == expected;
+    }
+
     @BeforeEach
     void init() {
         Problem11.setTABLE(TABLE);
@@ -28,114 +48,54 @@ class Problem11Test
     @DisplayName( "Проект Эйлера - Задача 11 - Наибольшее произведение по горизонтали" )
     void testHorizontal()
     {
-        // Таблица 4х4 и длина последовательности = 4
-        Problem11.setSequenceLength(4);
-        long greatestProductExpected = 660;
-        long greatestProductActual = Problem11.findGreatestProductInHorizontal();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 3
-        Problem11.setSequenceLength(3);
-        greatestProductExpected = 150;
-        greatestProductActual = Problem11.findGreatestProductInHorizontal();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 2
-        Problem11.setSequenceLength(2);
-        greatestProductExpected = 55;
-        greatestProductActual = Problem11.findGreatestProductInHorizontal();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
+        boolean b1, b2, b3;
+        b1 = invokeTest(4, 660, "Horizontal");
+        b2 = invokeTest(3, 150, "Horizontal");
+        b3 = invokeTest(2, 55, "Horizontal");
+        Assertions.assertTrue(b1 & b2 & b3);
     }
 
     @Test
     @DisplayName( "Проект Эйлера - Задача 11 - Наибольшее произведение по вертикали" )
     void testVertical()
     {
-        // Таблица 4х4 и длина последовательности = 4
-        Problem11.setSequenceLength(4);
-        long greatestProductExpected = 616;
-        long greatestProductActual = Problem11.findGreatestProductInVertical();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 3
-        Problem11.setSequenceLength(3);
-        greatestProductExpected = 308;
-        greatestProductActual = Problem11.findGreatestProductInVertical();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 2
-        Problem11.setSequenceLength(2);
-        greatestProductExpected = 77;
-        greatestProductActual = Problem11.findGreatestProductInVertical();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
+        boolean b1, b2, b3;
+        b1 = invokeTest(4, 616, "Vertical");
+        b2 = invokeTest(3, 308, "Vertical");
+        b3 = invokeTest(2, 77, "Vertical");
+        Assertions.assertTrue(b1 & b2 & b3);
     }
 
     @Test
     @DisplayName( "Проект Эйлера - Задача 11 - Наибольшее произведение диагонал сверху вниз вправо" )
     void testDiagonalRight()
     {
-        // Таблица 4х4 и длина последовательности = 4
-        Problem11.setSequenceLength(4);
-        long greatestProductExpected = 50;
-        long greatestProductActual = Problem11.findGreatestProductInRightDiagonal();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 3
-        Problem11.setSequenceLength(3);
-        greatestProductExpected = 50;
-        greatestProductActual = Problem11.findGreatestProductInRightDiagonal();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 2
-        Problem11.setSequenceLength(2);
-        greatestProductExpected = 70;
-        greatestProductActual = Problem11.findGreatestProductInRightDiagonal();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
+        boolean b1, b2, b3;
+        b1 = invokeTest(4, 50, "DiagonalRight");
+        b2 = invokeTest(3, 50, "DiagonalRight");
+        b3 = invokeTest(2, 70, "DiagonalRight");
+        Assertions.assertTrue(b1 & b2 & b3);
     }
 
     @Test
     @DisplayName( "Проект Эйлера - Задача 11 - Наибольшее произведение диагонали сверху вниз влево" )
     void testDiagonalLeft()
     {
-        // Таблица 4х4 и длина последовательности = 4
-        Problem11.setSequenceLength(4);
-        long greatestProductExpected = 24;
-        long greatestProductActual = Problem11.findGreatestProductInLeftDiagonal();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 3
-        Problem11.setSequenceLength(3);
-        greatestProductExpected = 300;
-        greatestProductActual = Problem11.findGreatestProductInLeftDiagonal();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 2
-        Problem11.setSequenceLength(2);
-        greatestProductExpected = 110;
-        greatestProductActual = Problem11.findGreatestProductInLeftDiagonal();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
+        boolean b1, b2, b3;
+        b1 = invokeTest(4, 24, "DiagonalLeft");
+        b2 = invokeTest(3, 300, "DiagonalLeft");
+        b3 = invokeTest(2, 110, "DiagonalLeft");
+        Assertions.assertTrue(b1 & b2 & b3);
     }
 
     @Test
     @DisplayName( "Проект Эйлера - Задача 11 - Наибольшее произведение по всем направлениям" )
     void testGetGreatestProduct()
     {
-        // Таблица 4х4 и длина последовательности = 4
-        Problem11.setSequenceLength(4);
-        long greatestProductExpected = 660;
-        long greatestProductActual = Problem11.findGreatestProduct();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 3
-        Problem11.setSequenceLength(3);
-        greatestProductExpected = 308;
-        greatestProductActual = Problem11.findGreatestProduct();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
-
-        // Таблица 4х4 и длина последовательности = 2
-        Problem11.setSequenceLength(2);
-        greatestProductExpected = 110;
-        greatestProductActual = Problem11.findGreatestProduct();
-        Assertions.assertEquals( greatestProductExpected, greatestProductActual );
+        boolean b1, b2, b3;
+        b1 = invokeTest(4,660, "Greatest");
+        b2 = invokeTest(3, 308, "Greatest");
+        b3 = invokeTest(2, 110, "Greatest");
+        Assertions.assertTrue(b1 & b2 & b3);
     }
 }
