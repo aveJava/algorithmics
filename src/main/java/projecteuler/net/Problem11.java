@@ -6,6 +6,9 @@ package projecteuler.net;
 // Каково наибольшее произведение четырех подряд идущих чисел в таблице 20×20,
 // расположенных в любом направлении (вверх, вниз, вправо, влево или по диагонали)?
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 class Problem11
 {
     private static final int[][] constantTABLE = {
@@ -41,31 +44,23 @@ class Problem11
         System.out.println( "Наибольшее произведение четырех подряд идущих чисел расположенных в любом направлении: " + result );
     }
 
+    // вызывает все методы поиска и возвращает наибольший найденный результат
     static long findGreatestProduct()
     {
-        // Наибольшее произведение чисел
-        long maxResult = 1;
-
-        // Направление - вправо
-        maxResult = Math.max( maxResult, findGreatestProductInHorizontal());
-
-        // Направление - вниз
-        maxResult = Math.max( maxResult, findGreatestProductInVertical());
-
-        // Направление - диагональ вправо
-        maxResult = Math.max( maxResult, findGreatestProductInRightDiagonal());
-
-        // Направление - диагональ влево
-        maxResult = Math.max( maxResult, findGreatestProductInLeftDiagonal());
-
-        return maxResult;
+        ArrayList<Long> list = new ArrayList<>();
+        list.add(findInHorizontal());       // Направление - вправо
+        list.add(findInVertical());         // Направление - вниз
+        list.add(findInRightDiagonal());    // Направление - диагональ вправо
+        list.add(findInLeftDiagonal());     // Направление - диагональ влево
+        Collections.sort(list);
+        return list.get(3);     // возвращает самое большое найденное значение
     }
 
     /**
      * Считает произведение элементов по горизонтали в направлении слева направо
      * @return - наибольшее произведение
      */
-    static long findGreatestProductInHorizontal()
+    static long findInHorizontal()
     {
         // Наибольшее произведение по горизонтали
         long result = 1;
@@ -103,7 +98,7 @@ class Problem11
      * Считает произведение элементов по вертикали в направлении сверху вниз
      * @return - наибольшее произведение
      */
-    static long findGreatestProductInVertical()
+    static long findInVertical()
     {
         // Наибольшее произведение по вертикали
         long result = 1;
@@ -141,7 +136,7 @@ class Problem11
      * Считает произведение элементов по диагонали в направлении вправо сверху вниз
      * @return - наибольшее произведение
      */
-    static long findGreatestProductInRightDiagonal()
+    static long findInRightDiagonal()
     {
         // Наибольшее произведение по диагонали сверху вниз вправо
         long result = 1;
@@ -184,7 +179,7 @@ class Problem11
      * Считает произведение элементов по диагонали в направлении влево сверху вниз
      * @return - наибольшее произведение
      */
-    static long findGreatestProductInLeftDiagonal()
+    static long findInLeftDiagonal()
     {
         // Наибольшее произведение по диагонали сверху вниз влево
         long result = 1;
@@ -235,12 +230,4 @@ class Problem11
     public static void setSequenceLength(int sequenceLength) {
         Problem11.sequenceLength = sequenceLength;
     }
-
-    //    public static int[][] getTABLE() {
-//        return TABLE;
-//    }
-//
-//    public static void setTABLE(int[][] table) {
-//        TABLE = table;
-//    }
 }

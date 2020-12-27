@@ -30,10 +30,10 @@ class Problem11Test
         Problem11.setSequenceLength(seqLength);
         long actual = -1;
         switch (type){
-            case "Horizontal" -> actual = Problem11.findGreatestProductInHorizontal();
-            case "Vertical" -> actual = Problem11.findGreatestProductInVertical();
-            case "DiagonalRight" -> actual = Problem11.findGreatestProductInRightDiagonal();
-            case "DiagonalLeft" -> actual = Problem11.findGreatestProductInLeftDiagonal();
+            case "Horizontal" -> actual = Problem11.findInHorizontal();
+            case "Vertical" -> actual = Problem11.findInVertical();
+            case "DiagonalRight" -> actual = Problem11.findInRightDiagonal();
+            case "DiagonalLeft" -> actual = Problem11.findInLeftDiagonal();
             case "Greatest" -> actual = Problem11.findGreatestProduct();
         }
         return actual == expected;
