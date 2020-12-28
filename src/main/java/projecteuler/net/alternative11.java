@@ -25,7 +25,7 @@ public class alternative11 {
             { 20, 73, 35, 29, 78, 31, 90,  1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57,  5, 54 },
             {  1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52,  1, 89, 19, 67, 48 }
     };
-    private static int seqLength = 3;
+    private static int seqLength = 4;
     private static int[][] TABLE = constantTABLE;
 
     public static void main(String[] args) {
@@ -42,11 +42,12 @@ public class alternative11 {
             for (int y = 0; y < TABLE.length; y++) {
                 // произведения, найденные в разных направлениях,
                 // относительно текущего элемента
-                horizontal = getHorizontalProd(x, y);
-                vertical = getVerticalProd(x, y);
-                rightDiagonal = getRDiagonalProd(x, y);
-                leftDiagonal = getLDiagonalProd(x, y);
+                horizontal    = getProduct(x, y, +1,  0);
+                vertical      = getProduct(x, y,  0, +1);
+                rightDiagonal = getProduct(x, y, +1, +1);
+                leftDiagonal  = getProduct(x, y, -1, +1);
 
+                // запоминаем наибольший результат (учитывая старый результат)
                 currentResult = LongStream.of(currentResult,
                         horizontal, vertical, rightDiagonal, leftDiagonal)
                         .max()
@@ -61,42 +62,17 @@ public class alternative11 {
         return currentResult;
     }
 
-    // вычисляет произведение чисел (количество чисел = seqLength),
-    // расположенных по горизонтали вправо от элемента с координатами
-    // x и y, включая сам этот элемент
-    public static long getHorizontalProd(int x, int y) {
-        return getProd(x, y, +1, 0);
-    }
-
-    // вычисляет произведение по вертикали вниз
-    public static long getVerticalProd(int x, int y) {
-        return getProd(x, y, 0, +1);
-    }
-
-    // вычисляет произведение по диагонали вправо вниз
-    public static long getRDiagonalProd(int x, int y) {
-        return getProd(x, y, +1, +1);
-    }
-
-    // вычисляет произведение по диагонали влево вниз
-    public static long getLDiagonalProd(int x, int y) {
-        return getProd(x, y, -1, +1);
-    }
-
-    static public void reset() {
-        TABLE = constantTABLE;
-        seqLength = 4;
-    }
-
-    public static void setTABLE(int[][] table) {
-        TABLE = table;
-    }
-
-    public static void setSeqLength(int seqLength) {
-        alternative11.seqLength = seqLength;
-    }
-
-    public static long getProd (int x, int y, int deltaX, int deltaY) {
+    /**
+     * возвращает произведение чисел (элементов TABLE)
+     * количество элементов определяется переменной seqLength
+     * @param x - координата х начального элемента
+     * @param y - координата у начального элемента
+     * следующие элементы находятся по правилу:
+     * @param deltaX - правило изменения координаты х
+     * @param deltaY - правило изменения координаты у
+     * @return - произведение, найденное по предоставленному правилу
+     */
+    public static long getProduct(int x, int y, int deltaX, int deltaY) {
         // проверка, допустимости координат самых удаленных элементов
         int X = x + deltaX * (seqLength - 1);
         int Y = y + deltaY * (seqLength - 1);
@@ -112,4 +88,18 @@ public class alternative11 {
 
         return product;
     }
+
+    static public void reset() {
+        TABLE = constantTABLE;
+        seqLength = 4;
+    }
+
+    public static void setTABLE(int[][] table) {
+        TABLE = table;
+    }
+
+    public static void setSeqLength(int seqLength) {
+        alternative11.seqLength = seqLength;
+    }
+
 }
