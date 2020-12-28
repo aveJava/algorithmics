@@ -24,7 +24,6 @@ public class alternative11Test {
      * @return - true, если результат поиска совпал с ожидаемым
      */
     boolean invokeTest(int seqLength, long expected, String type) {
-        System.out.printf("invoke %s/%d:\n", type, seqLength);
         alternative11.setSeqLength(seqLength);
         long actual = -1;
         switch (type){
@@ -34,7 +33,6 @@ public class alternative11Test {
             case "DiagonalLeft" -> actual = alternative11.getLDiagonalProd(1, 2);
             case "Greatest" -> actual = alternative11.findMaxProduct();
         }
-        System.out.printf("espected - %s, actual - %s\n", expected, actual);
         return actual == expected;
     }
 

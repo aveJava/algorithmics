@@ -27,8 +27,6 @@ public class alternative11 {
     };
     private static int seqLength = 3;
     private static int[][] TABLE = constantTABLE;
-    private static int widthT = TABLE[1].length; // ширина таблицы
-    private static int lengthT = TABLE.length;   // длина таблицы
 
     public static void main(String[] args) {
         reset();
@@ -40,8 +38,8 @@ public class alternative11 {
         long currentResult = Long.MIN_VALUE;    // текущий результат
 
         // для каждого элемента TABLE выполняем следующий цикл
-        for (int x = 0; x < widthT; x++) {
-            for (int y = 0; y < lengthT; y++) {
+        for (int x = 0; x < TABLE[1].length; x++) {
+            for (int y = 0; y < TABLE.length; y++) {
                 // произведения, найденные в разных направлениях,
                 // относительно текущего элемента
                 horizontal = getHorizontalProd(x, y);
@@ -67,45 +65,22 @@ public class alternative11 {
     // расположенных по горизонтали вправо от элемента с координатами
     // x и y, включая сам этот элемент
     public static long getHorizontalProd(int x, int y) {
-        long product = TABLE[y][x]; // элемент строки y с индексом х
-        // проверяем, что мы не уходим за пределы таблицы
-        if (widthT < x + seqLength) return Long.MIN_VALUE;
-        // находим произведение всех элементов и нужном направлении и количестве
-        for (int i = 1; i < seqLength; i++) {
-            product *= TABLE[y][x+i];
-        }
-        return product;
+        return getProd(x, y, +1, 0);
     }
 
     // вычисляет произведение по вертикали вниз
     public static long getVerticalProd(int x, int y) {
-        long product = TABLE[y][x];
-        if (lengthT < y + seqLength) return Long.MIN_VALUE;
-        for (int i = 1; i < seqLength; i++) {
-            product *= TABLE[y+i][x];
-        }
-        return product;
+        return getProd(x, y, 0, +1);
     }
 
     // вычисляет произведение по диагонали вправо вниз
     public static long getRDiagonalProd(int x, int y) {
-        long product = TABLE[y][x];
-        if (widthT < x + seqLength ||
-                lengthT < y + seqLength) return Long.MIN_VALUE;
-        for (int i = 1; i < seqLength; i++) {
-            product *= TABLE[y+i][x+i];
-        }
-        return product;
+        return getProd(x, y, +1, +1);
     }
 
     // вычисляет произведение по диагонали влево вниз
     public static long getLDiagonalProd(int x, int y) {
-        long product = TABLE[y][x];
-        if (x < seqLength - 1 || y + seqLength > lengthT) return Long.MIN_VALUE;
-        for (int i = 1; i < seqLength; i++) {
-            product *= TABLE[y+i][x-i];
-        }
-        return product;
+        return getProd(x, y, -1, +1);
     }
 
     static public void reset() {
@@ -119,7 +94,22 @@ public class alternative11 {
 
     public static void setSeqLength(int seqLength) {
         alternative11.seqLength = seqLength;
-        widthT = TABLE[1].length; // ширина таблицы
-        lengthT = TABLE.length;
+    }
+
+    public static long getProd (int x, int y, int deltaX, int deltaY) {
+        // проверка, допустимости координат самых удаленных элементов
+        int X = x + deltaX * (seqLength - 1);
+        int Y = y + deltaY * (seqLength - 1);
+        int width = TABLE[1].length;
+        int length = TABLE.length;
+        if (X<0 || X>=width || Y>=length) return Long.MIN_VALUE;
+
+        // находим произведение по предоставленному правилу
+        long product = TABLE[y][x]; // элемент строки y с индексом х
+        for (int i = 1; i < seqLength; i++) {
+            product *= TABLE[y+deltaY*i][x+deltaX*i];
+        }
+
+        return product;
     }
 }
